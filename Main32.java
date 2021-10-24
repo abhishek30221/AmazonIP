@@ -4,44 +4,24 @@ import java.util.*;
 
 public class Main32
 {
-    public static void solve(int arr[] , int n, int k)
+    public static  void solve(String str , int n)
     {
-        PriorityQueue<Integer> pq = new PriorityQueue<>(); 
-        for(int i = 0 ; i < n ; i++)
-        {
-            if(i < k)
-                pq.add(arr[i]); 
-            else
-            {
-                if(pq.peek() < arr[i])
-                {
-                    pq.remove(pq.peek()); 
-                    pq.add(arr[i]); 
-                }
-            }
-        }
-        while(pq.size() > 0)
-        {
-            System.out.print(pq.peek() + " "); 
-            pq.remove(); 
-        }
+        int count = 0;
+        int freq[] = new int[26];
+
+        for(char c : str.toCharArray())
+            freq[c-'a']++;
+
+        for(int i = 0 ; i < 26 ; i++)
+            if(freq[i]>1)
+                count++;
+
+        System.out.println(count); 
     }
     
     public static void main(String[] args) throws IOException{
-    	BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); 
-    	int n = Integer.parseInt(br.readLine()); 
-        String str[] = br.readLine().split(" "); 
-        int arr[] = new int[n]; 
-        for(int i = 0 ; i< n ; i++)
-            arr[i] = Integer.parseInt(str[i]); 
-
-        int k = Integer.parseInt(br.readLine()); 
-        
-        solve(arr,n,k); 
-
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); 
+        String str = br.readLine(); 
+        solve(str , str.length()); 
     }
 }
-
-
-// TIME COMPLEXITY : 0(nlog(k)); 
-// SPACE COMPLEXITY: 0(k)
